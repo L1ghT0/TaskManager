@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="assets/styles/style.css">
+    <script defer src="js/index.js" type="module"></script>
+</head>
+<body>
+
+<header>
+    <div id="header-container">
+        <nav id="nav">
+            <div class="nav-item">
+                <input type="button" value="New task" id="newTask">
+            </div>
+            <div class="nav-item">
+                <input type="button" value="History" id="history">
+            </div>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div id="content">
+        <div class="newTaskPage">
+            <form id="fields">
+                <div class="field">
+                    <label for="name">Task's name:</label>
+                    <input type="text" id="name">
+                </div>
+                <div class="field">
+                    <label for="description">Description</label>
+                    <textarea id="description"></textarea>
+                </div>
+                <div class="field">
+                    <label for="date">Deadline:</label>
+                    <input type="date" id="date">
+                    <input type="time" id="time">
+                </div>
+                <div class="submit">
+                    <input type="submit" value="Create" id="create">
+                </div>
+            </form>
+        </div>
+        <div class="historyPage">
+            <div class="history-header">
+                <div class="article">
+                    <h1 id="historyArticle">History:</h1>
+                </div>
+                <div class="history-nav">
+                    <div class="history-nav-item"> <input type="button" value="Edit" id="edit"></div>
+                    <div class="history-nav-item"> <input type="button" value="Done" id="done"></div>
+                    <div class="history-nav-item"> <input type="button" value="Delete" id="delete"></div>
+                </div>
+            </div>
+            <div class="history-list">
+                <table class="history-items">
+                    <thead>
+                        <tr id="history-list-header">
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th id="created">Created</th>
+                            <th id="deadline">Deadline</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
