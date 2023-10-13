@@ -1,16 +1,28 @@
 'use strict'
 import {getHistory, getItem} from "../localStorage.js";
-
-// this file is a temporal solution to send a notification
-// it does not cover lots of cases, so it doesn't work properly.
-// The code was written this way on purpose.
-// The purpose: write simple notification and replace with service worker as soon as possible
-
 let history = getHistory();
 
-for (let key of history){
-    let item = getItem(key);
-    if(!item.done) planNotification(item);
+if (!("Notification" in window)){
+    // Check if the browser supports notifications
+    console.log("This browser does not support desktop notification");
+}else if (Notification.permission === "granted") {
+    // Check whether notification permissions have already been granted;
+    // if so, create a notification
+    makeNotifications();
+} else if (Notification.permission !== "denied") {
+    // We need to ask the user for permission
+    Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+            makeNotifications();
+        }
+    });
+}
+
+function makeNotifications(){
+    for (let key of history){
+        let item = getItem(key);
+        if(!item.done) planNotification(item);
+    }
 }
 
 
@@ -32,13 +44,13 @@ function planNotification(item){
         }
         noticeIn = hours*3600000;
         noticeIn += minutes*60000;
-        notice(item.name, noticeIn);
+        notify(item.name, noticeIn);
     }
 }
 
-function notice(taskName = '', time = 0){
+function notify(taskName = '', time = 0){
     setTimeout(()=>{
-        alert(`The deadline for completing the task with name: '${taskName}' is over`)
+        const notification = new Notification(`The deadline for completing the task with name: '${taskName}' is over`);
     }, time)
 }
 

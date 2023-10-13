@@ -3,6 +3,7 @@
 let history = localStorage.getItem('task_manager_history');
 
 if(!history){
+    localStorage.clear();
     _setHistory([]);
 }
 
@@ -23,8 +24,6 @@ export function storeItem(key, value){
     let history = getHistory();
     history.push(key);
     _setHistory(history);
-
-    console.log('Item has been stored');
 }
 
 export function removeItem(key){
@@ -50,6 +49,4 @@ export function updateItem(key, value){
     } else {
         localStorage.setItem(key, JSON.stringify(value));
     }
-
-    console.log('Item has been updated');
 }
